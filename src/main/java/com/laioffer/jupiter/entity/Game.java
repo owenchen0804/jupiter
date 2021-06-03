@@ -1,71 +1,76 @@
 package com.laioffer.jupiter.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+// POJO Class 没有逻辑功能 主要定义一些 fields
+@JsonIgnoreProperties(ignoreUnknown = true)
+// 对于 json中有 Game中没有的field 就忽略 而不要抛出异常
+@JsonInclude(JsonInclude.Include.NON_NULL)
+// 对 null 的数据不convert
+@JsonDeserialize(builder = Game.Builder.class)
+// @JsonDeserialize indicates that Jackson needs to use Game.Builder
+// when constructing a Game object from JSON strings.
 public class Game {
+    @JsonProperty("id")
+    private final String id;
+
     @JsonProperty("name")
-    private String name;
+    private final String name;
 
-    @JsonProperty("developer")
-    private String developer;
+    @JsonProperty("box_art_url")
+    private final String boxArtUrl;
 
-    @JsonProperty("release_time")
-    private String releaseTime;
+    // Note the @JsonProperty("") annotation is applied to the getter method instead of the field.
+    // This is because the field is private and the way to get the data is by getter.
 
-    @JsonProperty("website")
-    private String website;
+    private Game(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.boxArtUrl = builder.boxArtUrl;
+    }
 
-    @JsonProperty("price")
-    private double price;
+    public String getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
     }
-    public String getDeveloper() {
-        return developer;
+
+    public String getBoxArtUrl() {
+        return boxArtUrl;
     }
-    public String getReleaseTime() {
-        return releaseTime;
-    }
-    public String getWebsite() {
-        return website;
-    }
-    public double getPrice() {
-        return price;
-    }
-    public Game(Builder builder) {
-        this.name = builder.name;
-        this.developer = builder.developer;
-        this.releaseTime = builder.releaseTime;
-        this.website = builder.website;
-        this.price = builder.price;
-    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Builder {
+        @JsonProperty("id")
+        private String id;
+
+        @JsonProperty("name")
         private String name;
-        private String developer;
-        private String releaseTime;
-        private String website;
-        private double price;
-        public Builder setName(String name) {
+
+        @JsonProperty("box_art_url")
+        private String boxArtUrl;
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder name(String name) {
             this.name = name;
             return this;
         }
-        public Builder setDeveloper(String developer) {
-            this.developer = developer;
+
+        public Builder boxArtUrl(String boxArtUrl) {
+            this.boxArtUrl = boxArtUrl;
             return this;
         }
-        public Builder setReleaseTime(String releaseTime) {
-            this.releaseTime = releaseTime;
-            return this;
-        }
-        public Builder setWebsite(String website) {
-            this.website = website;
-            return this;
-        }
-        public Builder setPrice(double price) {
-            this.price = price;
-            return this;
-        }
+
         public Game build() {
             return new Game(this);
         }
