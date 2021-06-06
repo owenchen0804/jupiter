@@ -1,1 +1,7 @@
+/Users/owen/Documents/GitHub/jupiter/src/main/java/com/laioffer/jupiter/entity/ItemType.java
+/Users/owen/Documents/GitHub/jupiter/src/main/java/com/laioffer/jupiter/entity/Item.java
 /Users/owen/Documents/GitHub/jupiter/src/main/java/com/laioffer/jupiter/servlet/GameServlet.java
+/Users/owen/Documents/GitHub/jupiter/src/main/java/com/laioffer/jupiter/servlet/SearchServlet.java
+/Users/owen/Documents/GitHub/jupiter/src/main/java/com/laioffer/jupiter/external/TwitchClient.java
+/Users/owen/Documents/GitHub/jupiter/src/main/java/com/laioffer/jupiter/external/TwitchException.java
+/Users/owen/Documents/GitHub/jupiter/src/main/java/com/laioffer/jupiter/entity/Game.java
