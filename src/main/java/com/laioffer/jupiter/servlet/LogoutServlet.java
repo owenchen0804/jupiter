@@ -1,0 +1,28 @@
+package com.laioffer.jupiter.servlet;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+
+@WebServlet(name = "LogoutServlet",  urlPatterns = {"/logout"})
+public class LogoutServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 如果存在就返回  如果不存在 false 表示不要创建新的
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            // invalidate的是server端的 session
+            // user 端的没有销毁
+            session.invalidate();
+        }
+
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+}

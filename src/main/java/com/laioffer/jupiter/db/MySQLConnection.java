@@ -47,7 +47,7 @@ public class MySQLConnection {
     }
 
     // 验证登录: 成功返回username, 不成功返回 ""
-    /*public String verifyLogin(String userId, String password) throws MySQLException {
+    public String verifyLogin(String userId, String password) throws MySQLException {
         if (conn == null) {
             System.err.println("DB connection failed");
             throw new MySQLException("Failed to connect to Database");
@@ -70,10 +70,10 @@ public class MySQLConnection {
             throw new MySQLException("Failed to save favorite item to Database");
         }
         return name;
-    }*/
+    }
 
     // 把新用户加到数据库中
-    /*public boolean addUser(User user) throws MySQLException {
+    public boolean addUser(User user) throws MySQLException {
         if (conn == null) {
             System.err.println("DB connection failed");
             throw new MySQLException("Failed to connect to Database");
@@ -94,7 +94,7 @@ public class MySQLConnection {
             e.printStackTrace();
             throw new MySQLException("Failed to get user information from Database");
         }
-    }*/
+    }
 
     public void setFavoriteItem(String userId, Item item) throws MySQLException {
         if (conn == null) {
