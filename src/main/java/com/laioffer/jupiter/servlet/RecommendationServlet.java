@@ -32,7 +32,7 @@ public class RecommendationServlet extends HttpServlet {
         } catch (RecommendationException e) {
             throw new ServletException(e);
         }
-        // 利用 utility function 将结果
+        // 利用 utility function 将结果显示
         ServletUtil.writeItemMap(response, itemMap);
     }
 }

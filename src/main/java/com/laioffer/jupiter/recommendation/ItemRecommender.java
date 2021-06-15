@@ -20,7 +20,8 @@ public class ItemRecommender {
     // 总共最多推荐20个
     private static final int DEFAULT_TOTAL_RECOMMENDATION_LIMIT = 20;
 
-    // recommendByTopGames method to ItemRecommender to handle recommendation when the user is not logged in.
+    // recommendByTopGames method to ItemRecommender to handle recommendation
+    // when the user is not logged in.
     // The recommendation is purely based-on top games returned by Twitch.
     private List<Item> recommendByTopGames(ItemType type, List<Game> topGames) throws RecommendationException {
         List<Item> recommendedItems = new ArrayList<>();
