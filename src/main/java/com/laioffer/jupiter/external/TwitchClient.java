@@ -214,7 +214,7 @@ public class TwitchClient {
 
         // Update gameId for all items. GameId is used by recommendation function
         for (Item item : items) {
-            item.setGameId(gameId); // why seeting gameId gain? 不是input吗？？
+            item.setGameId(gameId); // why setting gameId gain? 不是input吗？？
         }
         return items;
     }
