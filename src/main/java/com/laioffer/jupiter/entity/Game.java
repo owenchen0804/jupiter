@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-// POJO Class 没有逻辑功能 主要定义一些 fields
+// POJO Class 没有逻辑功能 主要定义一些fields
 @JsonIgnoreProperties(ignoreUnknown = true)
 // 对于 json中有 Game中没有的field 就忽略 而不要抛出异常
 @JsonInclude(JsonInclude.Include.NON_NULL)
