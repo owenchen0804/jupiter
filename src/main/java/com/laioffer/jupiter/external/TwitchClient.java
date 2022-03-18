@@ -22,7 +22,7 @@ import java.util.*;
 
 
 public class TwitchClient {
-    private static final String TOKEN = "Bearer 9h0e0j9s11aoa2zr6i1y2afuuro48q";
+    private static final String TOKEN = "Bearer og8gawqepjzgqxhtkykg2pemg48uen";    // Bearer后面是secret
     private static final String CLIENT_ID = "ztqkrgohrgd4m9tkz6a3dpwqb714nx";
     private static final String TOP_GAME_URL = "https://api.twitch.tv/helix/games/top?first=%s";
     private static final String GAME_SEARCH_URL_TEMPLATE = "https://api.twitch.tv/helix/games?name=%s";
@@ -86,6 +86,7 @@ public class TwitchClient {
             }
             // get response body
             HttpEntity entity = response.getEntity();
+            // System.out.println(entity);
             if (entity == null) {
                 throw new TwitchException("Failed to get result from Twitch API");
             }
