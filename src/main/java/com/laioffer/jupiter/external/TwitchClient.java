@@ -77,6 +77,8 @@ public class TwitchClient {
         // input: response
         // lambda expression like anonymous class
         CloseableHttpClient httpclient = HttpClients.createDefault();
+        //  这里是先写好了如何handle一个response，写完了这部分逻辑之后，才是真正建立了client的连接
+
         // Define the response handler to parse and return HTTP response body returned from Twitch
         ResponseHandler<String> responseHandler = response -> {
             int responseCode = response.getStatusLine().getStatusCode();
@@ -95,14 +97,15 @@ public class TwitchClient {
             // 我们需要的信息是 data 这个 key 所对应的 array
             return obj.getJSONArray("data").toString();
         };
-        // 用 httpclient 发送请求
+        //  上面规定好了handler要做的，现在才是建立client, 并发送请求
+        //  用 httpclient 发送请求
         try {
             // Define the HTTP request, TOKEN and CLIENT_ID are
             // used for user authentication on Twitch backend
             HttpGet request = new HttpGet(url);
             request.setHeader("Authorization", TOKEN);
             request.setHeader("Client-Id", CLIENT_ID);
-            return httpclient.execute(request, responseHandler);
+            return httpclient.execute(request, responseHandler);    //  这句话才是建立连接，用responseHandler来接
         } catch (IOException e) {
             e.printStackTrace();
             throw new TwitchException("Failed to get result from Twitch API");
@@ -123,7 +126,7 @@ public class TwitchClient {
             // 如果无法一一对应会出现JSONException
             // 后面一个参数（Game[].class）的意思是 convert 成 Game 这个 class 组成的 array
             // JSON -> Java Object Game
-            Game[] games = mapper.readValue(data, Game[].class);
+            Game[] games = mapper.readValue(data, Game[].class);    //  这里就是Deserialize
             return Arrays.asList(games);
             // return Arrays.asList(mapper.readValue(data, Game[].class));
         } catch (JsonProcessingException e) {
@@ -132,7 +135,7 @@ public class TwitchClient {
         }
     }
 
-    // Integrate search() and getGameList() together, returns the top x popular games from Twitch.
+    // Integrate searchTwitch() and getGameList() together, returns the top x popular games from Twitch.
     public List<Game> topGames(int limit) throws TwitchException {
         if (limit <= 0) {
             limit = DEFAULT_GAME_LIMIT;
@@ -216,6 +219,7 @@ public class TwitchClient {
         // Update gameId for all items. GameId is used by recommendation function
         for (Item item : items) {
             item.setGameId(gameId); // why setting gameId gain? 不是input吗？？
+            //  返回的item本身不带gameId，需要通过item自己的setter来设置出来
         }
         return items;
     }
