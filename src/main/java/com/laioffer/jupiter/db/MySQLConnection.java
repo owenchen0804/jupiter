@@ -106,9 +106,10 @@ public class MySQLConnection {
         saveItem(item);
         // 需要声明一下 加在哪个 cols
         // INSERT IGNORE INTO favorite_records (user_id, item_id) VALUES ('1111', '@#RE2S')
-        // 1. 用 string format 替换
+        // 1. 建议最好是用 string format 替换
         // String template = "INSERT IGNORE INTO favorite_records (user_id, item_id) VALUES (%s, %s)";
         // String sql = String.format(template, userId, item.getId());
+        //  否则像下面这样：
         // String template = "INSERT IGNORE INTO favorite_records (user_id) VALUES ('1111; DROP TABLES;')";
         // 数据被恶意删除
         // SELECT * from users WHERE USER_ID = 1111 OR 1 = 1;
@@ -119,7 +120,7 @@ public class MySQLConnection {
         // PreparedStatement statement = null;
         try {
             // statement = conn.prepareStatement(sql);
-            // PreparedStatement 是 sql library 提供的功能 安全
+            // PreparedStatement 是 sql library 提供的功能 安全！！
             // can avoid sql injection 恶意注入
             PreparedStatement statement = conn.prepareStatement(sql);
             // 只能一个 col 一个col 的 set
@@ -166,6 +167,7 @@ public class MySQLConnection {
         try {
             // statement = conn.prepareStatement(sql);
             PreparedStatement statement = conn.prepareStatement(sql);
+            //  注意这里setString的出发点是1，不是0-indexed
             statement.setString(1, item.getId());
             statement.setString(2, item.getTitle());
             statement.setString(3, item.getUrl());
@@ -195,7 +197,7 @@ public class MySQLConnection {
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, userId);
-            // Java从DB读数据的方法, 用executeQury()就会返回ResultSet
+            // Java从DB读数据的方法, 用executeQuery()就会返回ResultSet
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 String itemId = rs.getString("item_id");
