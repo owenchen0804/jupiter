@@ -7,8 +7,9 @@ import java.sql.Statement;
 // 用来创建 table in MySQL database
 public class MySQLTableCreator {
     // Run this as a Java application to reset the database.
-    // 会把之前所有的数据都删掉  创建出新的 table 用来  reset 数据库， 所以每次run main function 都要清理数据库把之前的table drop
-    // 此处 用 main function  使得这里可以独立的运行 不依赖于 tomcat 其它部分的运行依赖于tomcat
+    // 项目就是这样设计的：会把之前所有的数据都删掉  创建出新的 table 用来  reset 数据库，
+    // 所以每次run main function 都要清理数据库把之前的table drop
+    // 此处 用 main function  使得这里可以独立的运行 不依赖于 tomcat 其它部分的运行依赖于Tomcat
     public static void main(String[] args) {
         try {
             // Step 1 Connect to MySQL.
@@ -31,7 +32,7 @@ public class MySQLTableCreator {
             // Step 2 Drop tables in case they exist.
             // DROP TABLE IF EXISTS table_name;
             Statement statement = conn.createStatement();
-            // 这里的顺序  必须先删除 favorite  因为favorite 有foreign key 指向 user 和 item
+            // 这里DROP TABLE的顺序  必须先删除 favorite  因为favorite 有foreign key 指向 user 和 item
             String sql = "DROP TABLE IF EXISTS favorite_records";
             statement.executeUpdate(sql);   // update是写操作  还有insert 写操作提倡用 executeUpdate()
             // executeQuery() 读操作 并且有返回值
