@@ -256,7 +256,7 @@ public class MySQLConnection {
     }
 
     // recommendation helper method  推荐 game 给user
-    // { video: [ id1, id2, ..]; clip: [ , , , ...]; stream: [ , , , ...] }
+    // { video: [ gameId1, gameId2, ..]; clip: [ gameId1, gameId2,  ..]; stream: [ gameId1, gameId2, , ...] }
     public Map<String, List<String>> getFavoriteGameIds(Set<String> favoriteItemIds) throws MySQLException {
         if (conn == null) {
             System.err.println("DB connection failed");
