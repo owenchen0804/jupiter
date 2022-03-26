@@ -23,7 +23,7 @@ public class User {
     private String password;
     // password 不是 final 因为前端传进来的是明文 不会直接把用户传进来的密码存在数据库 我们存在数据库的是加密后的密码
     // 防止数据库被黑  用户隐私泄漏
-    // 一般前端加密 比较常见 前端发送请求之前就加密好 后端之用存在数据库中
+    // 一般前端加密 比较常见 前端发送请求之前就加密好 后端拿到之后存在数据库中
     @JsonProperty("first_name")
     private final String firstName;
     @JsonProperty("last_name")
