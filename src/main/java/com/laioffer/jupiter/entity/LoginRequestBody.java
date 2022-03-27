@@ -9,7 +9,8 @@ public class LoginRequestBody {
     private final String password;
 
     @JsonCreator
-    // JsonCreator annotation： 让 Jackson 用这个constructor 把JSON 格式的对象 转化为 Java Obj
+    // JsonCreator annotation： Deserialize
+    // 让 Jackson 用这个constructor 把JSON 格式的对象 转化为 Java Obj
     // JsonProperty annotation： 传进来的 key 如何 map 成 constructor里的参数
     public LoginRequestBody(@JsonProperty("user_id") String userId, @JsonProperty("password") String password) {
         this.userId = userId;
