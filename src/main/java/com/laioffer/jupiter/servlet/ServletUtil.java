@@ -40,6 +40,9 @@ public class ServletUtil {
         // DigestUtils.md5Hex(userId + DigestUtils.md5Hex(password).toLowerCase())
     }
 
+    //  抽取LoginServlet, RegisterServlet, FavoriteServlet的doPost()以及FavoriteServlet doDelete()
+    //  中的共同similar code to parse request bodies，来简化成一个共同的method谢在这里
+    //  其本质都是mapper.readValue()，也就是从JSON -> Java的过程，也就是Deserialize
     public static <T> T readRequestBody(Class<T> cl, HttpServletRequest request) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         try {
