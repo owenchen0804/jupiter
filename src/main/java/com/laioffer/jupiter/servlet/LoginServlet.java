@@ -54,11 +54,12 @@ public class LoginServlet extends HttpServlet {
             // tomcat 把session绑定在 request 和 response 上
             // 将response返回给前端的时候 session在header里一起返回给前端了
             LoginResponseBody loginResponseBody = new LoginResponseBody(body.getUserId(), username);
-            // 将 loginRequestBody 返回给前端
+            // 将 loginResponseBody 返回给前端，也就是拿到的userId还有verifyLogin之后得到的username
             response.setContentType("application/json;charset=UTF-8");
-            ObjectMapper mapper = new ObjectMapper();
-//            response.getWriter().print(new ObjectMapper().writeValueAsString(loginRequestBody));
-            mapper.writeValue(response.getWriter(), loginResponseBody);
+            //  ObjectMapper mapper = new ObjectMapper();
+            //  mapper.writeValue(response.getWriter(), loginResponseBody);
+            response.getWriter().print(new ObjectMapper().writeValueAsString(loginResponseBody));
+
         } else {    // 如果返回的 username为 "", 表示登陆失败，无法验证身份
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
