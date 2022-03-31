@@ -9,7 +9,8 @@ public class LoginResponseBody {
 
     @JsonProperty("name")
     private final String name;  // 主要需要返回 user 的名字 给前端 （前端要求）
-    // 在LoginServlet成功建立session后通过new LoginResponseBody给constructor传username，然后mapper打印显示到前端成JSON
+    // 在LoginServlet成功建立session后通过new LoginResponseBody给constructor传username，
+    // 然后mapper打印显示到前端成JSON，所以这里需要的是@JsonProperty
 
     // session ID
 
