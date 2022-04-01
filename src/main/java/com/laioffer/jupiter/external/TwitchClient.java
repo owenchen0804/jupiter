@@ -216,7 +216,7 @@ public class TwitchClient {
                 break;
         }
 
-        // Update gameId for all items. GameId is used by recommendation function
+        // Update gameId for all items, and gameId is used by recommendation function
         for (Item item : items) {
             item.setGameId(gameId); // why setting gameId gain? 不是input吗？？
             //  返回的item本身不带gameId，需要通过item自己的setter来设置出来
